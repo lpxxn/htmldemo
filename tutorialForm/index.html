@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Form Demo1</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="http://localhost:60377/test.js"></script>
+	<script type="text/javascript">
+		function submitform()
+		{
+			var form = document.getElementById("myform");
+			form.submit();
+		}
+
+		$(document).ready(function() {
+			// $("#subBtn2").click(
+			// 	function(e){
+			// 		var e1 = e;
+			// 		var f = $("#myform");
+			// 		f.submit();
+			// 	});
+
+            $("#btnLogin").click(function(evt) {
+            	//alert(document.cookie);
+            	 $.ajax({
+		            type: "POST",		     
+		            url: "http://localhost:60377/Login",		          
+		            crossDomain: true,
+		            data: {Code: 1000, Pwd: 111111},
+		            xhrFields: { withCredentials: true },		           
+		            enctype: 'multipart/form-data',
+		            beforeSend: function(xhr) {
+		            	var cookie = xhr;
+		            },
+		            success: function (result,status,xhr) {
+		                alert(result);
+		                var cookie = xhr.getResponseHeader("Set-Cookie");
+		                alert(cookie);
+		            },
+		            error: function (e) {
+		                alert("There was error Login files!");
+		            }
+		        });
+            });
+			$("#upload").unbind('click').bind('click', function (evt) {
+			//$("#upload").click(function(evt) {
+				evt.preventDefault();
+		        var fileUpload = $("#files").get(0);
+		        var files = fileUpload.files;
+		        var data = new FormData();
+		        for (var i = 0; i < files.length ; i++) {
+		            data.append(files[i].name, files[i]);
+		        }
+		        //alert(document.cookie);
+		        $.ajax({
+		            type: "POST",
+		             url: "http://localhost:60377/api/Values/uploadImg2",	
+		             //url: "http://localhost:60377/Company/Add",
+		              crossDomain: true,	
+		              data: data,   
+		             xhrFields: { withCredentials: true },		           		                  		            
+		            "processData": false,
+					  "contentType": false,
+					// "mimeType": "multipart/form-data",
+		            success: function (message) {
+		                alert(message);
+		            },
+		            error: function (e) {
+		                alert("There was error uploading files!");
+		            }
+		        });
+   			 });
+		});
+	</script>
+</head>
+<body>
+
+	<form id="myform" action="http://www.tst.com/Login" method="post">
+		Code : 
+		<br>
+		<input type="text" name="code">
+		<br>
+		Password: 
+		<br>
+		<input type="text" name="pwd">
+		
+	</form>
+	<br>
+	<button id="subBtn" style="width: 80px; height: 30px;" onclick="submitform()" >Submit</button>
+	<br>
+	<button id="subBtn2" style="width: 80px; height: 30px;" >Submit</button>
+
+	<input type="button" id="btnLogin" value="Login" />
+	<form action="http://localhost:60377/api/Values/uploadImg" method="post" enctype="multipart/form-data">
+		   <input type="file" name="files" multiple />
+		 <input type="submit" value="Upload Selected Files1" />
+	</form>
+	<form enctype="multipart/form-data">
+		 
+	</form>
+	<input type="file" id="files" name="files" multiple />
+		 <input type="button" 
+           id="upload" 
+           value="Upload Selected Files" />
+</body>
+</html>

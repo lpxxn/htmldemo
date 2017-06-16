@@ -1,0 +1,16 @@
+#boundDiv {
+	width: 300px;
+	height: 500px;
+
+	border: solid;
+    margin: 50px auto ;
+
+    background-size: 20px 20px;
+    background-image: linear-gradient(to left, lightgray 1px, transparent 1px),
+                      linear-gradient(to top, lightgray 1px, transparent 1px);
+}
+.moveBlock1 {
+	width: 20px;
+	height: 20px;
+	background: red;
+}

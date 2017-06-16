@@ -1,0 +1,37 @@
+/*
+
+ comment 
+*/
+p {
+	background: red;  /* */
+	font: bold italic 14px Tahoma; /*weight style size family*/
+}
+
+.table1, th, td{
+	border: 1px solid black;
+	border-collapse:collapse;
+}
+
+th, td {
+	padding: 15px;
+}
+
+.table1 {
+	border-spacing: 5px;
+}
+
+.apple {
+	width: 200px;
+	padding: 50px;
+	background-color: black;
+	background-image: linear-gradient(to top, yellow 50%, blue 30%, lightgreen 70%);
+}
+
+.pic{
+	float: right;
+}
+
+.para2{
+
+	clear: both;
+}

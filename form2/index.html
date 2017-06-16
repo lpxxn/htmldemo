@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> form</title>
+	<link rel="stylesheet" type="text/css" href="main.css">
+
+	
+</head>
+
+<body>
+<form action=""  method="POST">
+	<fieldset class="person_info">
+		<legend>test</legend>
+		<p>
+			<label for="username">username:</label> <input type="text" name="username" maxlength="10" value="name" size="10" id="username" />
+		</p>
+		<p>
+			<label >pwd:</label>  <input type="password" name="pwd" maxlength="10" value="pwd" size="10" />
+		</p>
+		<br/>
+	</fieldset>
+	
+	pick a food:
+	<br/>
+	<select name="food" multiple size="3">
+		<optgroup label="salty food">
+			<option value="potato_chips"> Potato chips </option>
+			<option value="popcorn"> Popcorn </option>
+			<option value="peanuts"> Peanuts </option>
+		</optgroup>
+		<optgroup label="other">
+			<option value="nachos"> Nachos </option>
+			<option value="pizza"> Pizza </option>
+		</optgroup>		
+	</select>
+
+	<br/>
+	what do you do in your spare time?
+	Play sport <input type="checkbox" name="cb1" value="sport" checked="checked" />
+	Play computer games <input type="checkbox" name="cb1" value="games" />
+	Shopping <input type="checkbox" name="cb1" value="Shopping" />
+
+	<br/>
+	<br/>
+	Do you play league of legends ?<br />
+	Yes <input type="radio" name="plays_lol" value="yes" />
+	No <input type="radio" name="plays_lol" value="no" checked="checked" />
+ 	<br/><br/>
+ 	Tell me a story: <br/>
+ 	<textarea name="story" rows="10" cols="50"> some text</textarea>
+
+ 	<br/><br/>
+ 	<input type="file" value="files" name="file">
+ 	<br/><br/>
+ 	<input type="button" value="i am a button" name="">
+ 	<input type="submit" name="">
+ 	<input type="reset" name="">
+	</form>
+</form>
+</body>
+</html>

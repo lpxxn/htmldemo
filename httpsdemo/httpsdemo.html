@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js"></script>
+    <script>
+        var form = new FormData();
+        form.append("Code", "1000");
+        form.append("Pwd", "111111");
+
+        var settings = {
+        "crossDomain": true,
+        "xhrFields": { withCredentials: true },           
+        "url": "https://192.168.0.49:44319/Login",
+        "method": "POST",
+        "cache-control": "no-cache",       
+        "processData": false,
+        "contentType": false,
+        "mimeType": "multipart/form-data",
+        "data": form
+        }
+
+        $.ajax(settings).done(function (response) {
+        console.log(response);
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>
