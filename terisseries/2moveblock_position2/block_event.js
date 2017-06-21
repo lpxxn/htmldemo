@@ -1,3 +1,4 @@
+var block_width = 20;
 $(document).ready(function() {
 
     var IBlock  = [[0, 2, 1, 2, 2, 2, 3, 2], [2, 0, 2, 1, 2, 2, 2, 3]];
@@ -10,10 +11,11 @@ $(document).ready(function() {
     var fixBlocks = {};
     var timeIntervalId;
     var block_obj;
+
     function createBlock() {
         var block_index = Math.floor(Math.random() * (blocks.length - 1));
-        return  new block(blocks[block_index], "moveBlock1", "black", {top: 80, left: 80}, $("#boundDiv"), fixBlocks);
-
+        //return  new block(blocks[block_index], "moveBlock1", "black", {top: 80, left: 80}, $("#boundDiv"), fixBlocks);
+        return new block(IBlock, "moveBlock1", "black", {top: 80, left: 80}, $("#boundDiv"), fixBlocks);
     }
     function saveFixBlock(block) {
         var saveDivs =  block.divs;
@@ -21,7 +23,86 @@ $(document).ready(function() {
             var css_left = parseInt(item.css("left"));
             var css_top = parseInt(item.css("top"));
             fixBlocks[css_left + "_" + css_top] = item;
-        })
+        });
+        checkCanRemoveRow();
+    }
+    
+    function checkCanRemoveRow() {
+        var statisticBlocks = {};
+        for (var key in fixBlocks) {
+            var values = key.split("_");
+            var item = fixBlocks[key];
+            var x_col = values[0];
+            var y_row = values[1];
+            if (!statisticBlocks[y_row]) statisticBlocks[y_row] = [];
+            statisticBlocks[y_row].push({"key": key, "item": item, "y_height": parseInt(item.css("left")), "x_width": block_width });
+        }
+
+        var canRemoveBlocks = {};
+        var __boardInfo = this.extractedOffsetInfo();
+        var boardWidth = __boardInfo.boundDivBoundWidth;
+        colCount = boardWidth / block_width;
+        rowCount = __boardInfo.boundDivBoundHeight / block_width;
+        for (var key in statisticBlocks) {
+            var moveObj = statisticBlocks[key];
+            var objCount = moveObj.length;
+            if (colCount !== objCount) continue;
+
+            if (!canRemoveBlocks[key]) canRemoveBlocks[key] = [];
+            canRemoveBlocks[key].push(moveObj);
+        }
+        if (jQuery.isEmptyObject(canRemoveBlocks)) return;
+
+        var moveKeys = Object.keys(canRemoveBlocks).sort( (v1, v2) =>{
+           return parseInt(v1) - parseInt(v2);
+        });
+
+        for (var moveKey in moveKeys) {
+            var currentMoveKey = moveKeys[moveKey];
+
+            canRemoveBlocks[currentMoveKey].forEach(ele => {
+                ele.forEach(item => {
+                    item.item.remove();
+                    var fixKey = item.key;
+                    delete fixBlocks[fixKey];
+                });
+            });
+
+
+        }
+
+        for (var moveKey in moveKeys) {
+            var currentMoveY = parseInt(moveKeys[moveKey]);
+            var fixBlocksKeys = Object.keys(fixBlocks).sort((v1, v2) => {
+                return  parseInt(v2.split("_")[1]) - parseInt(v1.split("_")[1]);
+            });
+
+
+            console.log("-----------begin---------", fixBlocksKeys.length, "  fixBlocksKeys", fixBlocksKeys);
+            for (var fixCurrentKeyIndex in fixBlocksKeys) {
+                var fixCurrentKey = fixBlocksKeys[fixCurrentKeyIndex];
+                var values = fixCurrentKey.split("_");
+                var currentTop =  parseInt(values[1]);
+
+                if (currentTop > currentMoveY) {
+                    console.log("continue----",  fixBlocks[fixCurrentKey], "  fixCurrentKey ", fixCurrentKey);
+                    continue;
+                }
+
+                var calHeight = currentTop + block_width;
+
+
+                var currentBlock = fixBlocks[fixCurrentKey];
+                currentBlock.css("top", calHeight + "px");
+                console.log("fixCurrentKeyIndex ", fixCurrentKeyIndex, " fixCurrentKey ", fixCurrentKey, " top ",currentBlock .css("top"), " calHeight ", calHeight);
+                fixBlocks[values[0] + "_" + calHeight] = currentBlock;
+                delete fixBlocks[fixCurrentKey];
+
+            }
+            console.log("-----------end---------", Object.keys(fixBlocks).length);
+        }
+
+
     }
 
     block_obj = createBlock();
@@ -53,32 +134,34 @@ $(document).ready(function() {
     createTimeInterval();
 
     $(document).keydown(function (e) {
-		console.log(e.keyCode);
 
+
+		if (!block_obj.can_move)
+		    return;
 		switch (e.keyCode) {
 			// up
             case 38 :
-                console.log("up");
+
                 block_obj.move({left:0, top: -1});
                 break;
             // down
             case 40:
-                console.log("down");
+
                 block_obj.move({left:0, top: 1});
                 break;
             // left
             case 37:
-                console.log("left");
+
                 block_obj.move({left:-1, top: 0});
                 break;
             // right
             case 39:
-                console.log("right");
+
                 block_obj.move({left:1, top: 0});
                 break;
 
             case 32:
-                console.log('space');
+
                 block_obj.route_block();
                 break;
 		}
@@ -131,7 +214,7 @@ var block = function(points, className, background_color, position, parent_ele, 
     this.position = position;
     this.parent_ele = parent_ele;
     this.can_move = true;
-    this.block_width = 20;
+
     this.fixBlocks = fixBlocks;
     this.init_block = function() {
         var current_point = this.points[this.current_index];
@@ -140,10 +223,8 @@ var block = function(points, className, background_color, position, parent_ele, 
             var y_axis = current_point[point_index];
             var new_div = createEle("div", this.className, this.background_color);
 
-            new_div.css("left", this.position.left + x_axis * this.block_width + "px");
-            new_div.css("top", this.position.top - y_axis * this.block_width + "px");
-
-            console.log(this.position, "x", x_axis, new_div.css("left"), "y", y_axis, new_div.css("top"));
+            new_div.css("left", this.position.left + x_axis * block_width + "px");
+            new_div.css("top", this.position.top - y_axis * block_width + "px");
             this.divs.push(new_div);
             this.parent_ele.append(new_div);
         }
@@ -160,14 +241,21 @@ var block = function(points, className, background_color, position, parent_ele, 
         for (var point_index = 0; point_index < size; point_index++) {
             var x_axis_c = current_point[point_index++];
             var y_axis_c = current_point[point_index];
-            forecast_width.push( this.position.left + x_axis_c * this.block_width);
-            forecast_height.push(this.position.top - y_axis_c * this.block_width);
+            var _w = this.position.left + x_axis_c * block_width;
+            var _h = this.position.top - y_axis_c * block_width;
+            if (this.fixBlocks[_w + "_" + _h]) return;
+
+            forecast_width.push(_w );
+            forecast_height.push(_h);
         }
         var __rel = extractedOffsetInfo();
         if (0 > Math.min.apply(null, forecast_width)) return;
-        if (__rel.boundDivBoundWidth < Math.max.apply(null, forecast_width) + this.block_width) return;
+        if (__rel.boundDivBoundWidth < Math.max.apply(null, forecast_width) + block_width) return;
         if (0 > Math.min.apply(null, forecast_height)) return;
-        if (__rel.boundDivBoundHeight < Math.max.apply(null, forecast_height)  + this.block_width) return;
+        if (__rel.boundDivBoundHeight < Math.max.apply(null, forecast_height)  + block_width) return;
+
+
+
 
         this.current_index = index;
 
@@ -184,13 +272,15 @@ var block = function(points, className, background_color, position, parent_ele, 
      * @param {Object} position
      */
     this.move = function(position) {
+        if (!this.can_move) return;
+
         var x_axis = position.left;
         var y_axis = position.top;
 
         var __rel = extractedOffsetInfo();
 
-        var x_width = x_axis * this.block_width;
-        var y_width = y_axis * this.block_width;
+        var x_width = x_axis * block_width;
+        var y_width = y_axis * block_width;
 
         var maxLeft = 0, minLeft = __rel.boundDivBoundWidth, minTop = __rel.boundDivBoundHeight, maxTop = 0;
         for (var i in  this.divs) {
@@ -200,8 +290,21 @@ var block = function(points, className, background_color, position, parent_ele, 
 
             // down
             if (position.top > 0) {
-                if (this.fixBlocks[css_left + "_" + (css_top + this.block_width)]) {
+                if (this.fixBlocks[css_left + "_" + (css_top + block_width)]) {
                     this.can_move = false;
+                    return;
+                }
+            }
+            // left
+            if (position.left < 0) {
+                if (this.fixBlocks[(css_left - block_width) + "_" + (css_top)]) {
+                    return;
+                }
+            }
+
+            // right
+            if (position.left > 0) {
+                if (this.fixBlocks[(css_left + block_width) + "_" + (css_top)]) {
                     return;
                 }
             }
@@ -239,9 +342,9 @@ var block = function(points, className, background_color, position, parent_ele, 
             if (y_axis !== 0)
                 item.css("top", parseInt(item.css("top")) + y_width);
         }, this);
-        if (bottom_height === __rel.boundDivBoundHeight) {
-            this.can_move = false;
-        }
+        // if (bottom_height === __rel.boundDivBoundHeight) {
+        //     this.can_move = false;
+        // }
 
     }
 };

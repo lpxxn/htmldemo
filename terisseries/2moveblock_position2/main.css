@@ -1,5 +1,6 @@
 #boundDiv {
-	width: 300px;
+	/*width: 300px;*/
+	width: 100px;
 	height: 500px;
 
 	border: solid;
