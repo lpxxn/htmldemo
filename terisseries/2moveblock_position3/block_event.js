@@ -32,7 +32,6 @@ $(document).ready(function() {
         for (var key in fixBlocks) {
             var values = key.split("_");
             var item = fixBlocks[key];
-            var x_col = values[0];
             var y_row = values[1];
             if (!statisticBlocks[y_row]) statisticBlocks[y_row] = [];
             statisticBlocks[y_row].push({"key": key, "item": item, "y_height": parseInt(item.css("left")), "x_width": block_width });
@@ -67,8 +66,6 @@ $(document).ready(function() {
                     delete fixBlocks[fixKey];
                 });
             });
-
-
         }
 
         for (var moveKey in moveKeys) {
@@ -203,7 +200,7 @@ var createEle = function (eleName, className, background_color) {
  * @param parent_ele
  */
 var block = function(points, className, background_color, position, parent_ele, fixBlocks) {
-    //
+    // 图形点集合
     if (!points || points.length === 0) throw "points invalid";
 
     this.points = points;
