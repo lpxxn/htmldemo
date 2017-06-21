@@ -14,8 +14,8 @@ $(document).ready(function() {
 
     function createBlock() {
         var block_index = Math.floor(Math.random() * (blocks.length - 1));
-        //return  new block(blocks[block_index], "moveBlock1", "black", {top: 80, left: 80}, $("#boundDiv"), fixBlocks);
-        return new block(IBlock, "moveBlock1", "black", {top: 80, left: 80}, $("#boundDiv"), fixBlocks);
+        return  new block(blocks[block_index], "moveBlock1", "black", {top: 80, left: 80}, $("#boundDiv"), fixBlocks);
+        //return new block(IBlock, "moveBlock1", "black", {top: 80, left: 80}, $("#boundDiv"), fixBlocks);
     }
     function saveFixBlock(block) {
         var saveDivs =  block.divs;
