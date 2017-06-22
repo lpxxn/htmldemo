@@ -13,7 +13,7 @@ $(document).ready(function() {
     var block_obj;
 
     function createBlock() {
-        var block_index = Math.floor(Math.random() * (blocks.length - 1));
+        var block_index = Math.floor(Math.random() * (blocks.length));
         return  new block(blocks[block_index], "moveBlock1", "black", {top: 80, left: 80}, $("#boundDiv"), fixBlocks);
         //return new block(IBlock, "moveBlock1", "black", {top: 80, left: 80}, $("#boundDiv"), fixBlocks);
     }
