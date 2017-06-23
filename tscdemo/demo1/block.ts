@@ -91,6 +91,7 @@ namespace MyTeris {
         canMove: boolean = true;
         isGameEnd:boolean =  false;
         block: Block;
+        shadowBlock: JQuery[] = [];
         private isAppendToParent = false;
         constructor(public parentEle: JQuery) {
         }
@@ -100,6 +101,8 @@ namespace MyTeris {
             this.isAppendToParent = false;
             this.position = position;
             this.block = new Block(points, cssClass, backgroundColor);
+            //this.block = new Block(points, cssClass, "rgba(0, 128, 255,.10)");
+
         }
 
         rotateBlockInfo() {
@@ -123,13 +126,60 @@ namespace MyTeris {
                     this.parentEle.append(item);
                 });
 
-                divs.forEach(item => {
+                divs.forEach((item, index) => {
                     const left = parseInt(item.css("left"));
                     const top = parseInt(item.css("top"));
                     item.css("left", this.position.left + left + "px");
                     item.css("top", this.position.top - top + "px");
+
+                    // showBlock
+                    const copyEle = item.clone();
+                    copyEle.css("left", this.position.left + left + "px");
+                    copyEle.css("top", 0 - top + "px");
+                    //copyEle.css("background", "rgba(0, 1, 10,.100)");
+                    this.shadowBlock.push(copyEle);
+                    this.parentEle.append(copyEle);
+                    console.log("item x", item.css("left"), " top ", item.css("top"));
+                    console.log("copy x", copyEle.css("left"), " top ", copyEle.css("top"));
                 });
+                this.showShadowBlock();
             }
+        }
+
+        showShadowBlock() {
+            if (this.shadowBlock.length === 0) return;
+            let max_y = -100000, fix_top_y = null;
+            let x = 0;
+            this.shadowBlock.forEach(item => {
+                const y = parseInt(item.css("top")) + this.block.blockWidth;
+                if (y > max_y) {
+                    max_y = y;
+                    x = parseInt(item.css("left"));
+                }
+            });
+            var calcHeight = this.boundHeight() - max_y;
+
+            // split fixBlocks Key
+            for (let key in this.fixBlocks) {
+                const values = key.split("_");
+                const x_row = parseInt(values[0]);
+                const y_row = parseInt(values[1]);
+                if (x !== x_row) continue;
+                if (!fix_top_y) {
+                    fix_top_y = y_row;
+                } else if (fix_top_y > y_row) {
+                    fix_top_y = y_row;
+                }
+            }
+
+            if (fix_top_y) {
+                calcHeight = fix_top_y - max_y;
+            }
+            this.shadowBlock.forEach(item => {
+                const y = parseInt(item.css("top"));
+                item.css("top", (y + calcHeight) + "px");
+            });
+
         }
 
         moveLeft() {
@@ -138,7 +188,7 @@ namespace MyTeris {
             if (!obj) return;
             if ((obj.minLeft - block_width) < 0) return;
 
-            this.moveBlock(-block_width, 0);
+            this.moveCurrentBlock(-block_width, 0);
         }
 
         moveRight() {
@@ -146,14 +196,14 @@ namespace MyTeris {
             let obj = this.checkBlockCanMove(block_width, 0);
             if (!obj) return;
             if ((obj.maxLeft + block_width * 2) > this.boundWidth()) return;
-            this.moveBlock(block_width, 0);
+            this.moveCurrentBlock(block_width, 0);
         }
 
         moveUp() {
             const block_width = this.block.blockWidth;
             let obj = this.checkBlockCanMove(block_width, 0);
             if (!obj || obj.minTop <= 0) return;
-            this.moveBlock(0, -block_width);
+            this.moveCurrentBlock(0, -block_width);
         }
 
         moveDown() {
@@ -169,17 +219,21 @@ namespace MyTeris {
                 this.canMove = false;
                 return;
             }
-            this.moveBlock(0, block_width);
+            this.moveCurrentBlock(0, block_width);
         }
 
-        private moveBlock(leftValue: number, topValue: number){
+        private moveCurrentBlock(leftValue: number, topValue: number){
             this.position.left += leftValue;
             this.position.top += topValue;
             const divs = this.block.divs();
-            divs.forEach(item => {
-                item.css("left", parseInt(item.css("left")) + leftValue);
+            divs.forEach((item, index) => {
+                var left_x = parseInt(item.css("left")) + leftValue;
+                item.css("left", left_x);
+                this.shadowBlock[index].css("left", left_x);
                 item.css("top", parseInt(item.css("top")) + topValue);
             });
+
+            this.showShadowBlock();
         }
 
         private checkBlockCanMove(leftValue: number, topValue: number) {
@@ -216,6 +270,10 @@ namespace MyTeris {
                 const css_top = parseInt(item.css("top"));
                 this.fixBlocks[css_left + "_" + css_top] = item;
             });
+            this.shadowBlock.forEach(item=>{
+                item.remove();
+            });
+            this.shadowBlock.length = 0;
             this.checkCanRemoveRow();
         }
         checkCanRemoveRow() {

@@ -10,8 +10,7 @@
     linear-gradient(to top, lightgray 1px, transparent 1px);
 }
 .moveBlock1 {
-    background: red;
+    background: rgba(255,255,255,.5);
     position: absolute;
     border: 1px solid rgba(255,255,255,.5);
-
 }
