@@ -18,17 +18,69 @@
         var SBlock  = [[1, 3, 1, 2, 1, 1, 2, 2], [0, 2, 1, 2, 2, 2, 1, 1], [0, 2, 1, 3, 1, 2 ,1, 1], [1, 3, 0, 2, 1, 2 , 2, 2]];
         var blocks = [IBlock, LBlock, ZBlock1, ZBlock2, OBlock, SBlock];
 
+        var KEY = {UP: 38, DOWN: 40, LEFT: 37, RIGHT: 39, SPACE: 32, CTRL: 17, ALT: 18};
+        var timeIntervalId = null;
+        var stop = false;
+        var blockObj = null;
         $(document).ready(function () {
-            const block = new MyTeris.Block(IBlock, "moveBlock1", MyTeris.getRandomColor());
-            var divs = block.divs();
-            var boundDiv = $("b1");
-            divs.forEach(function(item) {
-                boundDiv.append(item);
-            }, this);
-        })
+            var boundDiv = $("#boundDiv");
+
+            blockObj = new MyTeris.MoveBlock(boundDiv);
+            createBlock();
+            createTimeInterval();
+            $(document).keydown(function (e) {
+                if (!blockObj.canMove) return;
+                switch (e.keyCode) {
+                    case KEY.UP:
+                        blockObj.moveUp();
+                        break;
+                    case KEY.DOWN:
+                        blockObj.moveDown();
+                        break;
+                    case KEY.LEFT:
+                        blockObj.moveLeft();
+                        break;
+                    case KEY.RIGHT:
+                        blockObj.moveRight();
+                        break;
+                    case KEY.SPACE:  // ROTATE
+
+                        blockObj.rotateBlockInfo();
+                        break;
+                    case KEY.CTRL:  // STOP
+
+                        break;
+                }
+            })
+        });
+
+
+        function createBlock() {
+            var boundDiv = $("#boundDiv");
+            var left = boundDiv.width() / 2 - MyTeris.TerisConfig.getInstance().blockWidth * 2;
+            var block_index = Math.floor(Math.random() * (blocks.length));
+            blockObj.newBlock(blocks[block_index], "moveBlock1", MyTeris.getRandomColor(), {left: left, top: 0});
+            blockObj.showElement();
+        }
+
+       function createTimeInterval() {
+           timeIntervalId = setInterval(function () {
+               if (blockObj.isGameEnd) {
+                   clearInterval(timeIntervalId);
+                   return;
+               }
+                if (blockObj.canMove) {
+                    blockObj.moveDown();
+                } else {
+                    blockObj.saveFixBlock();
+                    createBlock();
+                }
+           }, 1000)
+       }
+
     </script>
 </head>
-<body id="b1">
+<body>
     <div id="boundDiv"></div>
 </body>
 </html>

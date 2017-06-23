@@ -2,7 +2,13 @@
 
 namespace MyTeris {
     export class Point {
-        x: number;
-        y: number;
+        left: number;
+        top: number;
+    }
+
+    export interface RotateInfo {
+        index: number;
+        widths: number[];
+        heights: number[];
     }
 }

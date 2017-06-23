@@ -14,7 +14,7 @@ $(document).ready(function() {
 
     function createBlock() {
         var block_index = Math.floor(Math.random() * (blocks.length - 1));
-        return  new block(blocks[block_index], "moveBlock1", "black", {top: 80, left: 80}, $("#boundDiv"), fixBlocks);
+        return  new block(blocks[block_index], "moveBlock1", "black", {top: 0, left: 0}, $("#boundDiv"), fixBlocks);
         //return new block(IBlock, "moveBlock1", "black", {top: 80, left: 80}, $("#boundDiv"), fixBlocks);
     }
     function saveFixBlock(block) {
@@ -138,27 +138,21 @@ $(document).ready(function() {
 		switch (e.keyCode) {
 			// up
             case 38 :
-
                 block_obj.move({left:0, top: -1});
                 break;
             // down
             case 40:
-
                 block_obj.move({left:0, top: 1});
                 break;
             // left
             case 37:
-
                 block_obj.move({left:-1, top: 0});
                 break;
             // right
             case 39:
-
                 block_obj.move({left:1, top: 0});
                 break;
-
             case 32:
-
                 block_obj.route_block();
                 break;
 		}
