@@ -136,7 +136,10 @@ namespace MyTeris {
                     const copyEle = item.clone();
                     copyEle.css("left", this.position.left + left + "px");
                     copyEle.css("top", 0 - top + "px");
-                    //copyEle.css("background", "rgba(0, 1, 10,.100)");
+                    /*for IE*/
+                    copyEle.css("filter", "alpha(opacity=45)");
+                    /* CSS3 standard */
+                    copyEle.css("opacity", "0.45");
                     this.shadowBlock.push(copyEle);
                     this.parentEle.append(copyEle);
                     console.log("item x", item.css("left"), " top ", item.css("top"));

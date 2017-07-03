@@ -119,7 +119,10 @@ var MyTeris;
                     var copyEle = item.clone();
                     copyEle.css("left", _this.position.left + left + "px");
                     copyEle.css("top", 0 - top + "px");
-                    //copyEle.css("background", "rgba(0, 1, 10,.100)");
+                    /*for IE*/
+                    copyEle.css("filter", "alpha(opacity=45)");
+                    /* CSS3 standard */
+                    copyEle.css("opacity", "0.45");
                     _this.shadowBlock.push(copyEle);
                     _this.parentEle.append(copyEle);
                     console.log("item x", item.css("left"), " top ", item.css("top"));
