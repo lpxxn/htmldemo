@@ -4,7 +4,37 @@
 	<meta charset="utf-8">
 	<title>TreeDemo 1</title>
 	<link rel="stylesheet" type="text/css" href="main.css">
-	<script type="text/javascript" src="../jquery-3.2.1.js"></script>
+	<script type="text/javascript" src="jquery-3.2.1.js"></script>
+	<script type="text/javascript" src="lptree.js"></script>
+	<script type="text/javascript">
+		$(function () {
+		    var treeObj = new LpTree($(".lp_tree"), function (aObj) {
+                console.log(aObj);
+            });
+
+			var obj1 = {
+
+			  click: function () {
+                  console.log('click1');
+              }
+			};
+
+			var obj2 = {
+			    click: function () {
+                    console.log('click2');
+                }
+			};
+
+            var newObj = $.extend(obj1, obj2);
+            console.log(newObj);
+            newObj.click();
+
+
+        });
+
+
+
+	</script>
 </head>
 <body>
 <div>
@@ -16,7 +46,6 @@
 					<li><a href="#">东城区</a></li>
 					<li><a href="#">西城区</a></li>
 				</ul>
-
 			<li><a href="#">河北</a></li>
 				<ul>
 					<li><a href="#">石家庄</a></li>
