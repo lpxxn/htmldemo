@@ -3,7 +3,7 @@
  */
 
 
-class Item {
+export class Item {
     name: string;
     isFolder: boolean;
     isDisplay: boolean;
@@ -16,7 +16,7 @@ class Item {
 
 }
 
-class TreeData {
+export class TreeData {
 
     data: Item[] = [];
     constructor() {

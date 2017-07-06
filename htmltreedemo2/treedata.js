@@ -2,6 +2,7 @@
 /**
  * Created by li on 2017/7/5.
  */
+Object.defineProperty(exports, "__esModule", { value: true });
 var Item = (function () {
     function Item(name, isFolder, isDisplay) {
         this.child = [];
@@ -11,6 +12,7 @@ var Item = (function () {
     }
     return Item;
 }());
+exports.Item = Item;
 var TreeData = (function () {
     function TreeData() {
         this.data = [];
@@ -33,3 +35,4 @@ var TreeData = (function () {
     };
     return TreeData;
 }());
+exports.TreeData = TreeData;
