@@ -6,9 +6,13 @@ var treedata_1 = require("./treedata");
  */
 var LpTree = (function () {
     function LpTree() {
-        this.containerEle = $(".lp_tree");
+        var treeDiv = $(".lp_tree");
+        this.containerEle = $("<ul> </ul>");
+        treeDiv.append(this.containerEle);
         this.data = new treedata_1.TreeData().getData();
         console.log(this.data);
+        this.data.forEach(function (item) {
+        });
     }
     return LpTree;
 }());
