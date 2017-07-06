@@ -3,7 +3,8 @@
  */
 
 class LpTree {
-
+    treeContainer: JQuery;
+    
 }
 
 
