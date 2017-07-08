@@ -3,7 +3,7 @@ import {Item, TreeData} from "./treedata";
  * Created by li on 2017/7/5.
  */
 
-class LpTree {
+export class LpTree {
     
     containerEle: JQuery;
     data: Item[];

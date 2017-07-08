@@ -37,3 +37,4 @@ var LpTree = (function () {
     };
     return LpTree;
 }());
+exports.LpTree = LpTree;
