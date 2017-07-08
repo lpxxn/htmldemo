@@ -29,6 +29,8 @@ var TreeData = (function () {
         tangshan.child.push(new Item("唐一区", true, true));
         root2.child.push(tangshan);
         root2.child.push(new Item("石家庄", true, true));
+        this.data.push(root1);
+        this.data.push(root2);
     }
     TreeData.prototype.getData = function () {
         return this.data;

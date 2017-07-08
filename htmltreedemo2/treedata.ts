@@ -38,6 +38,8 @@ export class TreeData {
 
         root2.child.push(new Item("石家庄", true, true));
 
+        this.data.push(root1);
+        this.data.push(root2);
 
     }
 
