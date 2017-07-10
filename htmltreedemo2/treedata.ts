@@ -26,7 +26,7 @@ export class TreeData {
         root1.child.push(new Item("西城区", false, true));
         root1.child.push(new Item("朝阳区", false, false));
 
-        const root2 = new Item("河北省", true, false);
+        const root2 = new Item("河北省", true, true);
         const baoding = new Item("保定", true, true);
         baoding.child.push(new Item("一区", false, true));
         baoding.child.push(new Item("二区", false, true));

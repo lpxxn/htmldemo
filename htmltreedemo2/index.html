@@ -8,13 +8,13 @@
 	<script type="text/javascript" src="./dist/lp_tree.js"></script>
 	<script type="text/javascript">
 		$(function () {
-		    var treeObj = new lp_tree.LpTree();
+		    var treeObj = new lp_tree.LpTree(function (obj) {
+                console.log(obj);
+                console.log($(obj));
+            });
 
 
         });
-
-
-
 	</script>
 </head>
 <body>
