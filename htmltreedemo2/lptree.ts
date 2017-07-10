@@ -53,8 +53,10 @@ export class LpTree {
                 ulObj.show();
                 ulObj.prev("li").addClass("open");
             }
-
         });
+        this.treeDiv.find("li").hover(function() {
+            $(this).toggleClass("hover");
+        })
     }
 
     constructTree(item: Item, parentEle: JQuery) {
