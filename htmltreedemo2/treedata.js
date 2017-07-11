@@ -20,7 +20,7 @@ var TreeData = (function () {
         root1.child.push(new Item("东城区", false, true));
         root1.child.push(new Item("西城区", false, true));
         root1.child.push(new Item("朝阳区", false, false));
-        var root2 = new Item("河北省", true, false);
+        var root2 = new Item("河北省", true, true);
         var baoding = new Item("保定", true, true);
         baoding.child.push(new Item("一区", false, true));
         baoding.child.push(new Item("二区", false, true));
