@@ -1,0 +1,45 @@
+.lp_tree a {
+	text-decoration: none;
+}
+
+/* 菜单 */
+.lp_tree ul {
+	padding:0 0 0 15px;
+	margin:0;
+}
+
+
+/*  菜单项 */
+.lp_tree ul li {
+	line-height: 30px;
+	list-style: none;
+	background: url(imgs/st_node.gif) no-repeat left center;
+	margin: 0;
+	padding: 0px 0  0px 24px;
+}
+
+
+/* 子菜单 */
+/*.lp_tree ul li ul {}*/
+
+/* 子菜单项 */
+/*.lp_tree ul li ul li {}*/
+
+/*父节点*/
+.lp_tree .folder {
+	list-style-image: url(imgs/st_icon.png);
+	background: url(imgs/st_folder.gif) no-repeat left center;
+	padding: 0 0 0 20px;
+}
+
+
+/*展开的父节点*/
+.lp_tree .open {
+	list-style-image: url(imgs/st_icon_open.png);
+	background: url(imgs/st_folder_open.gif) no-repeat left center;
+	padding: 0 0 0 20px;
+}
+
+.lp_tree .hover {
+	background-color: #ffa;
+}
