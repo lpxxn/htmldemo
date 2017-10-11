@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	 <script src="./../../jquery-3.2.1.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+        	$('#btn1').on('click', function () {
+        		$('#A').css('width', '0')
+        		$('#B').css('margin-left', '0');
+        	});
+           $('#btn2').on('click',	function() {
+				    
+				$('#A').css('width', '200px')
+				$('#B').css('margin-left', '200px');
+				
+        	});
+        })
+      
+    </script>
+    <style type="text/css">
+    	html, body {
+		    margin: 0;
+		    padding: 0;
+		    border: 0;
+		}
+		#A, #B {
+		    
+		    height: 500px;
+		}
+		#A {
+			float: left;
+		    width: 200px;
+		    background:orange;
+		}
+		#B {
+		    margin-left: 200px;
+		    right: 0px;
+		    background:green;		    
+				}
+		#C {
+			clear: both;
+		}
+    </style>
+</head>
+<body>
+<div id="header">
+	<header>Title</header>
+</div>
+<div>
+	<div id="A"></div>
+	<div id="B"><input type="button" id="btn1" value="button">
+		<input type="button" id="btn2" value="button">
+	</div>
+</div>
+
+<div id="C">
+	<h1>Footer</h1>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./../../jquery-3.2.1.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#trig').on('click', function () {
+               
+                $('#col1').removeClass("col-md-3").addClass("col-0  overflow: hidden clear: both");
+                 $('#col2').removeClass("col-md-9").addClass('col-md-12');
+                
+            });
+
+            $('#trig2').on('click', function() {
+                $('#col2').removeClass('col-md-12').addClass("col-md-9");
+                $('#col1').removeClass('col-0  overflow: hidden clear: both').addClass("col-md-3 ");
+                
+            });
+        })
+      
+    </script>
+
+    <style type="text/css">
+    .row div {
+        height: 200px;
+        -webkit-transition: width 0.3s ease, margin 0.3s ease, padding 0.3s ease;
+        -moz-transition: width 0.3s ease, margin 0.3s ease, padding 0.3s ease;
+        -o-transition: width 0.3s ease, margin 0.3s ease, padding 0.3s ease;
+        transition: width 0.3s ease, margin 0.3s ease, padding 0.3s ease;
+    }
+
+    .row .col-0 {
+        width: 0%;
+        float:left;
+    }
+
+    #col1 {
+        background-color: #A6BFBA;
+    }
+
+    #col2 {
+        background-color: #DE4124;
+    }
+
+    #trig {
+        margin: 50px;
+    }
+
+    .row-fluid .col-0 + [class*="col"]{
+        margin-left: 0;
+    }
+    </style>
+
+    
+
+</head>
+<body>
+    
+    <div class="container">
+        <div class="row">
+            <div id="col1" class="col-md-3">Left Col</div>
+            <div id="col2" class="col-md-9">
+                Right Col
+                <a id="trig" class="btn btn-inverse">Hid</a>
+                <input type="button" id="trig2" value="Show">
+            </div>
+            
+          </div>
+            
+        </div>
+        <div>
+            <h2> Hello</h2>
+        </div>
+</body>
+</html>
