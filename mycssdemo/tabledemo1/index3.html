@@ -9,9 +9,24 @@
 
 		.table-list {
 			width: 100%;
-			border-top: 3px solid #65cc7;
+			border-top: 3px solid #65ccc7;
+			
 			float: left;
 		}
+
+		.table-list tbody tr:nth-child(2n+1) {
+		    background-color:  silver;
+		}
+
+		.table-list tr th:nth-child(1) {
+		    padding-left: 30px;
+		}
+
+		.table-list tr th {
+			line-height: 40px;
+			text-align: left;
+		}
+
 		.table-list .table-operation {
 			background-color: lightblue;
 		}		
@@ -21,12 +36,13 @@
 			cursor: pointer;
 		    display: inline-block;
 		    margin-right: 30px;
-		    /* width: 100px; */
+		    /*width: 100px; */
 			line-height: 17px;
 			text-align: left;
 		}
-		.table-operation td {
+		.table-list td {
 			line-height: 40px;
+			padding-left: 10px;
 		}
 
 /*		.table-operation td input[type="checkbox"] {
@@ -39,8 +55,7 @@
 		}*/
 
 		.table-list .table-checkbox-div {
-			float: left;
-			margin-left: 20px;
+			float: left;			
 			margin-right: 30px;
 		}
 
@@ -92,11 +107,60 @@
 					<a>操作1</a>
 				</td>
 			</tr>
+			<tr class="table-operation" style="background-color: #8999a4">
+				
+					<th>姓名</th>
+					<th>姓别</th>
+					<th>角色</th>
+					<th>组织</th>
+					<th>手机号</th>
+				
+			</tr>
 		</thead>
 
 		<tbody>
 			<tr>
-				<td></td>
+				<td>
+					<input type="checkbox" id="checkbox1" class="table-checkbox med">
+					<label for="checkbox1" name="checkbox1" class="table-label med elegant">张三</label>
+				</td>
+				<td>男</td>
+				<td>管理员</td>
+				<td>科技 小组</td>
+				<td>18100000028</td>
+			</tr>
+
+			<tr>
+				<td>
+					<input type="checkbox" id="checkbox2" class="table-checkbox med">
+					<label for="checkbox2" name="checkbox2" class="table-label med elegant">李四</label>
+				</td>
+				<td>男</td>
+				<td>管理员</td>
+				<td>科技小组</td>
+				<td>18160000028</td>
+			</tr>
+
+			<tr>
+				<td>
+					<input type="checkbox" id="checkbox3" class="table-checkbox med">
+					<label for="checkbox3" name="checkbox3" class="table-label med elegant">貂蝉</label>
+				</td>
+				<td>女</td>
+				<td>委员</td>
+				<td>实施小组</td>
+				<td>18160033028</td>
+			</tr>
+
+			<tr>
+				<td>
+					<input type="checkbox" id="checkbox4" class="table-checkbox med">
+					<label for="checkbox4" name="checkbox4" class="table-label med elegant">吕布</label>
+				</td>
+				<td>男</td>
+				<td>委员</td>
+				<td>实施小组</td>
+				<td>18161033028</td>
 			</tr>
 		</tbody>
 	</table>
