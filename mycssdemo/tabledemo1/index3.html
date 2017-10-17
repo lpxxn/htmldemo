@@ -4,13 +4,28 @@
 	<meta charset="utf-8">
 	<title></title>
 	<script src="./../../jquery-3.2.1.js"></script>
+
+	<script type="text/javascript">
+		$(function() {
+			var $allcheck = $('.table-operation input[type="checkbox"]');
+
+			var $tbody = $('.table-list tbody');
+			$allcheck.on('click', function() {
+				var $list_checkbox = $tbody.find('input[type="checkbox"]');
+				var isChecked = $(this).is(':checked');
+				$list_checkbox.prop("checked", isChecked);
+				$allcheck.prop("checked", isChecked);
+
+			})
+		})
+	</script>
 	<style type="text/css">
 
 
 		.table-list {
 			width: 100%;
 			border-top: 3px solid #65ccc7;
-			
+
 			float: left;
 		}
 
