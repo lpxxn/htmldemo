@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script src="./../../jquery-3.2.1.js"></script>
+	<style type="text/css">
+		.table-list {
+			width: 100%;
+			border-top: 3px solid #65cc7;
+			float: left;
+		}
+		.table-list .table-operation {
+			background-color: lightblue;
+		}
+		.table-operation td {
+			line-height: 40px;
+			text-align: left;
+		}
+/*		.table-operation td input[type="checkbox"] {
+			-webkit-appearance: none;
+			margin-left: 10px;
+			border: 1px solid #ffffff;
+			width: 14px;
+			height: 14px;
+			vertical-align: text-bottom;
+		}*/
+
+
+		input[type=checkbox].css-checkbox {
+	  		position: absolute; 
+		    overflow: hidden; 
+		    clip: rect(0 0 0 0); 
+		    height:1px; 
+		    width:1px; 
+		    margin:-1px; 
+		    padding:0;
+		    border:0;
+		}
+
+		input[type=checkbox].css-checkbox.med:checked + label.css-label.med {
+		    background-position: 0 -17px;
+		}
+
+
+		input[type=checkbox].css-checkbox.med + label.css-label.med {
+		    padding-left: 22px;
+		    height: 17px;
+		    display: inline-block;
+		    line-height: 17px;
+		    background-repeat: no-repeat;
+		    background-position: 0 0;
+		    font-size: 15px;
+		    vertical-align: middle;
+		    cursor: pointer;
+		}
+
+		.elegant {
+		    background-image: url("img/elegant.png");
+		}
+
+	</style>
+</head>
+<body>
+
+	<table class="table-list" cellspacing="0px">
+		<thead >
+			<tr class="table-operation">
+				<td colspan="5">
+					<div style="float: left; margin-left: 10px; margin-right: 10px; margin-bottom: 2px;">
+						<input type="checkbox" id="checkbox65" class="css-checkbox med">
+						<label for="checkbox65" name="checkbox65_lbl" class="css-label med elegant">Sleek Checkbox</label>
+        			</div>
+					<a>测试1</a>
+					<a>修改1</a>
+					<a>操作1</a>
+				</td>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+
+</body>
+</html>
