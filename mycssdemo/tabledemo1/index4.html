@@ -5,7 +5,25 @@
 	<title></title>
 	<script src="./../../jquery-3.2.1.js"></script>
 
+	<link rel="stylesheet" type="text/css" href="./../layui/css/layui.css">
+	<script src="./../layui/layui.js"></script>
+
+	<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+
+	<script src="./../js/common.js"></script>
+
+	
+	
+
 	<script type="text/javascript">
+		//一般直接写在一个js文件中
+		layui.use(['layer', 'form'], function(){
+		  // var layer = layui.layer
+		  // ,form = layui.form;
+		  
+		});
+
 		$(function() {
 			var $allcheck = $('.table-operation input[type="checkbox"]');
 
@@ -16,7 +34,31 @@
 				$list_checkbox.prop("checked", isChecked);
 				$allcheck.prop("checked", isChecked);
 
-			})
+			});
+
+
+			// search user data
+
+			$('#btn_search_userdata').bind('clic', function(event) {
+
+			});
+
+
+			//
+			$('.search-conditions button').on('click', function(event) {
+				var $target = $(event.target);
+				var id = $target.prop('id');
+
+				switch(id) {
+					case 'btn_search_userdata':
+						alert('search user data')
+					break;
+
+					case 'btn_search_reset':
+						alert('Reset')
+					break;
+				}
+			});
 		})
 	</script>
 	<style type="text/css">
@@ -106,9 +148,49 @@
 		    background-image: url("img/elegant_normal.png");
 		}
 
+
+		.search-conditions {
+			margin: 15px 10px;
+		}
+
+
+
+		/* layui  */
+		button {
+			width: 120px;
+		}
+
+		.layui-form-label {
+			width: 100px;
+		}
 	</style>
 </head>
 <body>
+<div class="layui-container">
+	<div class="search-conditions">
+		<div class="layui-form ">
+			<div class="layui-form-item" >			
+				
+				 <label >性别：</label>
+			     <div class="layui-inline">
+					<select>
+						<option value selected="selected">请选择性别</option>
+						<option value="1" >男</option>
+						<option value="2" >女</option>
+
+					</select>
+				</div>
+				
+				<div class="layui-inline" style="float: right;">
+					<button class="layui-btn"  id="btn_search_userdata" type="button">Search Data</button>
+				</div>
+				<div class="layui-inline" style="float: right;">
+					<button class="layui-btn"  id="btn_search_reset" type="button">Reset</button>			
+				</div>
+			</div>				
+		</div>
+	</div>
+	
 
 	<table class="table-list" cellspacing="0px">
 		<thead >
@@ -180,6 +262,8 @@
 			</tr>
 		</tbody>
 	</table>
+</div>
+	
 
 </body>
 </html>
