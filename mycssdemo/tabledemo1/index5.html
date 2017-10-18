@@ -11,24 +11,43 @@
 	<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"></script>
 
-	<script src="./../js/common.js"></script>
-
-	
-	
+	<script src="./../js/common.js"></script>	
+	<script src="./ajaxuserdata/userdatainfo.js"></script>	
 
 	<script type="text/javascript">
 		//一般直接写在一个js文件中
-		layui.use(['layer', 'form', 'laydate'], function(){
+		layui.use(['layer', 'form', 'laydate', 'laypage'], function(){
 			var laydate = layui.laydate;
 			laydate.render({
 				elem: '#date'
 			});
+			var laypage = layui.laypage;
+
+			var pageObj = new PageObj('pagedemo', function(pageNow, callback) {
+				var self = this;
+				// 
+				laypage.render({
+					elem: 'pagedemo',
+					count: 700, //数据总数
+					curr: pageNow,
+					limits:[10, 50, 100, 200],
+					layout: ['prev', 'page', 'next', 'count', 'limit', 'skip'],
+
+					jump: function(pageObj, isFirst) {
+						self.PageEvent(pageObj, isFirst);
+					}
+				});
+			})
+
 		  // var layer = layui.layer
 		  // ,form = layui.form;
 		  
 		});
 
 		$(function() {
+			
+
+
 			var $allcheck = $('.table-operation input[type="checkbox"]');
 
 			var $tbody = $('.table-list tbody');
@@ -70,9 +89,6 @@
 
 		.table-list {
 			width: 100%;
-			border-top: 3px solid #65ccc7;
-
-			float: left;
 		}
 
 		.table-list tbody tr:nth-child(2n) {
@@ -115,6 +131,12 @@
 			height: 14px;
 			vertical-align: text-bottom;
 		}*/
+
+		.table-content {
+			height: 500px;
+			overflow: auto;
+			border: 1px solid #65ccc7;
+		}
 
 		.table-list .table-checkbox-div {
 			float: left;			
@@ -168,11 +190,6 @@
 		button {
 			/*width: 100px;*/
 			min-width: 115px;
-		}
-
-		.layui-form-label {
-
-			/*width: 100px;*/
 		}
 
 		.layui-form-label-left {
@@ -246,88 +263,117 @@
 
 				
 			</div>
-			<!-- <div class="layui-form-item">
-				<div class="layui-inline" style="float: right;">
-					<button class="layui-btn"  id="btn_search_userdata" type="button">Search Data</button>
-				</div>
-				<div class="layui-inline" style="float: right;">
-					<button class="layui-btn"  id="btn_search_reset" type="button">Reset</button>			
-				</div>
-			</div> -->
 		</div>
 	</div>
 	
-
-	<table class="table-list" cellspacing="0px">
-		<thead >
-			<tr class="table-operation">
-				<td colspan="5">
-					<div class="table-checkbox-div" >
-						<input type="checkbox" id="checkbox65" class="table-checkbox med">
-						<label for="checkbox65" name="checkbox65_lbl" class="table-label med elegant">全选</label>
-        			</div>
-					<a>测试1</a>
-					<a>修改1</a>
-					<a>操作1</a>
-				</td>
-			</tr>
-			<tr class="table-operation" style="background-color: #8999a4">
-				
-					<th>姓名</th>
-					<th>姓别</th>
-					<th>角色</th>
-					<th>组织</th>
-					<th>手机号</th>
-				
-			</tr>
-		</thead>
-
-		<tbody>
-			<tr>
-				<td>
-					<input type="checkbox" id="checkbox1" class="table-checkbox med">
-					<label for="checkbox1" name="checkbox1" class="table-label med elegant">张三</label>
-				</td>
-				<td>男</td>
-				<td>管理员</td>
-				<td>科技 小组</td>
-				<td>18100000028</td>
-			</tr>
-
-			<tr>
-				<td>
-					<input type="checkbox" id="checkbox2" class="table-checkbox med">
-					<label for="checkbox2" name="checkbox2" class="table-label med elegant">李四</label>
-				</td>
-				<td>男</td>
-				<td>管理员</td>
-				<td>科技小组</td>
-				<td>18160000028</td>
-			</tr>
-
-			<tr>
-				<td>
-					<input type="checkbox" id="checkbox3" class="table-checkbox med">
-					<label for="checkbox3" name="checkbox3" class="table-label med elegant">貂蝉</label>
-				</td>
-				<td>女</td>
-				<td>委员</td>
-				<td>实施小组</td>
-				<td>18160033028</td>
-			</tr>
-
-			<tr>
-				<td>
-					<input type="checkbox" id="checkbox4" class="table-checkbox med">
-					<label for="checkbox4" name="checkbox4" class="table-label med elegant">吕布</label>
-				</td>
-				<td>男</td>
-				<td>委员</td>
-				<td>实施小组</td>
-				<td>18161033028</td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="table-content">
+		<table class="table-list" cellspacing="0px">
+			<thead >
+				<tr class="table-operation">
+					<td colspan="5">
+						<div class="table-checkbox-div" >
+							<input type="checkbox" id="checkbox65" class="table-checkbox med">
+							<label for="checkbox65" name="checkbox65_lbl" class="table-label med elegant">全选</label>
+						</div>
+						<a>测试1</a>
+						<a>修改1</a>
+						<a>操作1</a>
+					</td>
+				</tr>
+				<tr class="table-operation" style="background-color: #8999a4">
+					
+						<th>姓名</th>
+						<th>姓别</th>
+						<th>角色</th>
+						<th>组织</th>
+						<th>手机号</th>
+					
+				</tr>
+			</thead>
+	
+			<tbody>
+				<tr>
+					<td>
+						<input type="checkbox" id="checkbox1" class="table-checkbox med">
+						<label for="checkbox1" name="checkbox1" class="table-label med elegant">张三</label>
+					</td>
+					<td>男</td>
+					<td>管理员</td>
+					<td>科技 小组</td>
+					<td>18100000028</td>
+				</tr>
+	
+				<tr>
+					<td>
+						<input type="checkbox" id="checkbox2" class="table-checkbox med">
+						<label for="checkbox2" name="checkbox2" class="table-label med elegant">李四</label>
+					</td>
+					<td>男</td>
+					<td>管理员</td>
+					<td>科技小组</td>
+					<td>18160000028</td>
+				</tr>
+	
+				<tr>
+					<td>
+						<input type="checkbox" id="checkbox3" class="table-checkbox med">
+						<label for="checkbox3" name="checkbox3" class="table-label med elegant">貂蝉</label>
+					</td>
+					<td>女</td>
+					<td>委员</td>
+					<td>实施小组</td>
+					<td>18160033028</td>
+				</tr>
+	
+				<tr>
+					<td>
+						<input type="checkbox" id="checkbox4" class="table-checkbox med">
+						<label for="checkbox4" name="checkbox4" class="table-label med elegant">吕布</label>
+					</td>
+					<td>男</td>
+					<td>委员</td>
+					<td>实施小组</td>
+					<td>18161033028</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox" id="checkbox2" class="table-checkbox med">
+						<label for="checkbox2" name="checkbox2" class="table-label med elegant">李四</label>
+					</td>
+					<td>男</td>
+					<td>管理员</td>
+					<td>科技小组</td>
+					<td>18160000028</td>
+				</tr>
+	
+				<tr>
+					<td>
+						<input type="checkbox" id="checkbox3" class="table-checkbox med">
+						<label for="checkbox3" name="checkbox3" class="table-label med elegant">貂蝉</label>
+					</td>
+					<td>女</td>
+					<td>委员</td>
+					<td>实施小组</td>
+					<td>18160033028</td>
+				</tr>
+	
+				<tr>
+					<td>
+						<input type="checkbox" id="checkbox4" class="table-checkbox med">
+						<label for="checkbox4" name="checkbox4" class="table-label med elegant">吕布</label>
+					</td>
+					<td>男</td>
+					<td>委员</td>
+					<td>实施小组</td>
+					<td>18161033028</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<div>
+		<div id="pagedemo"></div>
+	</div>
 </div>
 	
 
