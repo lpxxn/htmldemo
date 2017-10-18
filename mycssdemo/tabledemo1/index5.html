@@ -30,8 +30,9 @@
 				var sex = $('select[name="sex"]').val();
 				var name = $('.search-conditions input[name="name"]').val();
 				var beginDatetime = $('.search-conditions input[name="begindate"]').val();
+				var comments = $('.search-conditions input[name="comments"]').val();
 
-				console.log(sex, name, beginDatetime);
+				console.log(sex, name, beginDatetime, comments);;
 				var self = this;
 				// 
 				laypage.render({
@@ -254,7 +255,7 @@
 					    <div class="layui-inline">
 					      <label class="layui-form-label layui-form-label-left">备注</label>
 					      <div class="layui-input-inline">
-					        <input type="tel" name="url" lay-verify="url" autocomplete="off" class="layui-input">
+					        <input type="tel" name="comments" lay-verify="url" autocomplete="off" class="layui-input">
 					      </div>
 					    </div>
 					</div>
