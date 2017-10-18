@@ -7,6 +7,7 @@ var PageBase = function() {
 PageBase.prototype.init = function() {
     console.log("init base");
     this._callback = null;
+    this._pageSize = 10;
     this._pageNow = 1;
 }
 
@@ -19,7 +20,7 @@ PageBase.prototype.CallbackProcess = function () {
     if (this._callback) {
         this._isLoading = true;
         var self = this;
-        this._callback.call(this, this._pageNow, function() {
+        this._callback.call(this, this._pageNow, this._pageSize, function() {
             self._isLoading = false;
         })
     }
@@ -60,6 +61,7 @@ PageObj.prototype.PageEvent = function(pageObj, isFirst) {
     }
     this._pageObj = pageObj;
     this._pageNow = this._pageObj.curr;
+    this._pageSize = this._pageObj.limit;
     this.CallbackProcess();
 }
 
