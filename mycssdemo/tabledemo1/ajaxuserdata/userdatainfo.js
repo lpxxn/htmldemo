@@ -26,6 +26,12 @@ PageBase.prototype.CallbackProcess = function () {
     }
 }
 
+PageBase.prototype.SearchData = function(pageNow, pageSize) {
+    this._pageNow = pageNow;
+    this._pageSize = pageSize;
+    this.CallbackProcess();
+}
+
 //  
 
 /**
