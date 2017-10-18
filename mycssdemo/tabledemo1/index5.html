@@ -28,9 +28,10 @@
 
 			pageObj = new PageObj('pagedemo', function(pageNow, pageSize, callback) {
 				var sex = $('select[name="sex"]').val();
-				var name = $('.search-conditions input[name="name"').val();
+				var name = $('.search-conditions input[name="name"]').val();
+				var beginDatetime = $('.search-conditions input[name="begindate"]').val();
 
-				console.log(sex, name);
+				console.log(sex, name, beginDatetime);
 				var self = this;
 				// 
 				laypage.render({
@@ -242,7 +243,7 @@
 				    <div class="layui-inline">
 				      <label class="layui-form-label layui-form-label-big">验证日期</label>
 				      <div class="layui-input-inline">
-				        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+				        <input type="text" name="begindate" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
 				      </div>
 				    </div>
 					
