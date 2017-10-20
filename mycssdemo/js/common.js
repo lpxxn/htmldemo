@@ -6,16 +6,15 @@ var fAjax = function(url, oData, callback) {
 	$.ajax({
 		url:url,
 		type:"post",
-		data:oData,
-		success: function(sData) {
-			var rdata = JSON.parse(sData);
-			var error = rData.error;
-			var sState = rData.state;
+		contentType: "application/json; charset=utf-8;",		
+		data: JSON.stringify(oData),
+		success: function(rData) {
+			var sStatus = rData.status;
 			var realData = rData.data;
-			if (sState == 'true' || sState == 'ok') {
-				callback && callback(realData);
+			if (sStatus == true || sStatus == 'ok') {
+				callback && callback(rData);
 			} else {
-				callback && callback(error);
+				callback && callback(-1);
 			}			
 		},
 		error: function(err) {

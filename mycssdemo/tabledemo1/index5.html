@@ -31,28 +31,63 @@
 				var name = $('.search-conditions input[name="name"]').val();
 				var beginDatetime = $('.search-conditions input[name="begindate"]').val();
 				var comments = $('.search-conditions input[name="comments"]').val();
-
-				console.log(sex, name, beginDatetime, comments);;
 				var self = this;
-				// 
-				laypage.render({
-					elem: 'pagedemo',
-					count: 700, //数据总数					
-					curr: pageNow,
-					limit: pageSize,
-					limits:[10, 50, 100, 200],
-					layout: ['prev', 'page', 'next', 'count', 'limit', 'skip'],
 
-					jump: function(pageObj, isFirst) {
-						self.PageEvent(pageObj, isFirst);
+				fAjax("http://127.0.0.1:9065/paginationPersion", {page_size: pageSize, current_page: pageNow}, function(data) {
+					if (data == -1) {
+						console.log(1111);
 					}
-				});
+					console.log(data);
+					console.log(sex, name, beginDatetime, comments);;
+
+					//
+					laypage.render({
+						elem: 'pagedemo',
+						count: data.pageTotal, //数据总数
+						curr: pageNow,
+						limit: pageSize,
+						limits:[10, 50, 100, 200],
+						layout: ['prev', 'page', 'next', 'count', 'limit', 'skip'],
+
+						jump: function(pageObj, isFirst) {
+							self.PageEvent(pageObj, isFirst);
+						}
+					});
+					setTableData(data.data);
+				})
 			})
 
 		  // var layer = layui.layer
 		  // ,form = layui.form;
 		  
 		});
+
+		function setTableData(data) {
+			var sHtml = ''
+			$tbodyDom = $('tbody');
+			$tbodyDom.empty();
+			for (var i in data) {
+				var obj = data[i];
+				console.log(data[i]);
+				var opereateHtml = '<a data-id="' + obj.id + '" class="col-operate-user" data-type="1">编辑</a><a data-id="' + obj.id + '" class="col-operate-user"  data-type="2">删除</a>'
+
+				sHtml += '<tr>\
+					<td width="150px">\
+						<input type="checkbox" id="checkbox' + i + '" class="table-checkbox med" dat-id="' + obj.id +'">\
+						<label for="checkbox' + i + '" name="checkbox' + i + '" class="table-label med elegant">' + obj.first_name + obj.last_name + '</label>\
+						' + obj.id + '\
+					</td>\
+					<td>'+ obj.email +'</td>\
+					<td>' + obj.gender + '</td>\
+					<td>' + obj.ip_address + '</td>\
+					<td>' + obj.phone +'</td>\
+					<td>' + opereateHtml + '</dt>\
+				</tr>'
+			}
+
+			
+			$tbodyDom.html(sHtml);
+		}		
 
 		$(function() {
 			
@@ -92,6 +127,33 @@
 					break;
 				}
 			});
+
+			//$('tbody').delegate('a', 'click', function(event) {
+			$('tbody').delegate('.col-operate-user', 'click', function(event) {
+				var $target = $(event.target);
+				var type = $(this).attr('data-type');
+				var id = $(this).attr('data-id');
+				switch(type) {
+					case '1' :	// 编辑
+						layui.layer.open({
+							type: 2,
+							title: '欢迎页',    
+							area: ['600px', '500px'],
+							//area: '500px',
+							skin: 'layui-layer-lan', 
+							//content: $('#userinfodetail').html(),
+							content : ['/htmldemo/mycssdemo/tabledemo1/ajaxuserdata/userdetail.html', 'yes']
+						
+						});					
+					break;
+
+					case '2': // 删除
+
+					break;
+				}
+			})
+
+
 		})
 	</script>
 	<style type="text/css">
@@ -120,7 +182,7 @@
 		}		
 
 
-		.table-operation a {
+		.table-list a {
 			cursor: pointer;
 		    display: inline-block;
 		    margin-right: 30px;
@@ -280,7 +342,7 @@
 		<table class="table-list" cellspacing="0px">
 			<thead >
 				<tr class="table-operation">
-					<td colspan="5">
+					<td colspan="6">
 						<div class="table-checkbox-div" >
 							<input type="checkbox" id="checkbox65" class="table-checkbox med">
 							<label for="checkbox65" name="checkbox65_lbl" class="table-label med elegant">全选</label>
@@ -290,93 +352,18 @@
 						<a>操作1</a>
 					</td>
 				</tr>
-				<tr class="table-operation" style="background-color: #8999a4">
-					
+				<tr class="table-operation" style="background-color: #8999a4">					
 						<th>姓名</th>
-						<th>姓别</th>
-						<th>角色</th>
-						<th>组织</th>
+						<th>Email</th>
+						<th>性别</th>
+						<th>Ip地址</th>
 						<th>手机号</th>
-					
+						<th>操作</th>
 				</tr>
 			</thead>
 	
 			<tbody>
-				<tr>
-					<td>
-						<input type="checkbox" id="checkbox1" class="table-checkbox med">
-						<label for="checkbox1" name="checkbox1" class="table-label med elegant">张三</label>
-					</td>
-					<td>男</td>
-					<td>管理员</td>
-					<td>科技 小组</td>
-					<td>18100000028</td>
-				</tr>
-	
-				<tr>
-					<td>
-						<input type="checkbox" id="checkbox2" class="table-checkbox med">
-						<label for="checkbox2" name="checkbox2" class="table-label med elegant">李四</label>
-					</td>
-					<td>男</td>
-					<td>管理员</td>
-					<td>科技小组</td>
-					<td>18160000028</td>
-				</tr>
-	
-				<tr>
-					<td>
-						<input type="checkbox" id="checkbox3" class="table-checkbox med">
-						<label for="checkbox3" name="checkbox3" class="table-label med elegant">貂蝉</label>
-					</td>
-					<td>女</td>
-					<td>委员</td>
-					<td>实施小组</td>
-					<td>18160033028</td>
-				</tr>
-	
-				<tr>
-					<td>
-						<input type="checkbox" id="checkbox4" class="table-checkbox med">
-						<label for="checkbox4" name="checkbox4" class="table-label med elegant">吕布</label>
-					</td>
-					<td>男</td>
-					<td>委员</td>
-					<td>实施小组</td>
-					<td>18161033028</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="checkbox" id="checkbox2" class="table-checkbox med">
-						<label for="checkbox2" name="checkbox2" class="table-label med elegant">李四</label>
-					</td>
-					<td>男</td>
-					<td>管理员</td>
-					<td>科技小组</td>
-					<td>18160000028</td>
-				</tr>
-	
-				<tr>
-					<td>
-						<input type="checkbox" id="checkbox3" class="table-checkbox med">
-						<label for="checkbox3" name="checkbox3" class="table-label med elegant">貂蝉</label>
-					</td>
-					<td>女</td>
-					<td>委员</td>
-					<td>实施小组</td>
-					<td>18160033028</td>
-				</tr>
-	
-				<tr>
-					<td>
-						<input type="checkbox" id="checkbox4" class="table-checkbox med">
-						<label for="checkbox4" name="checkbox4" class="table-label med elegant">吕布</label>
-					</td>
-					<td>男</td>
-					<td>委员</td>
-					<td>实施小组</td>
-					<td>18161033028</td>
-				</tr>
+				
 			</tbody>
 		</table>
 	</div>
@@ -384,8 +371,14 @@
 	<div>
 		<div id="pagedemo"></div>
 	</div>
-</div>
-	
-
+</div>	
 </body>
+<div style="display:none;">
+	<div id="userinfodetail">
+		<h1>
+			Hello
+		</h1>
+	</div>
+</div>
+
 </html>

@@ -1,0 +1,113 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DialogUserInfo</title>
+    <script src="./../../../jquery-3.2.1.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="./../../layui/css/layui.css">
+    <script src="./../../layui/layui.js"></script>
+    
+    <!--<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">-->
+    <!--<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"></script>-->
+
+    <script>
+        layui.use(['layer', 'form'], function(){
+			var laydate = layui.laydate;			
+        });
+    </script>
+
+    <style>
+        .logindiv {
+            margin: 1px 5px;
+        }
+    </style>
+
+</head>
+<body >
+        <div class="layer-form logindiv">
+            <div class="layui-form-item">
+                <label class="layui-form-label " >手机号码：</label>
+                <div class="layui-input-block">
+                    <input type="text" id="username" placeholder="手机号码" class="layui-input"/>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label " >密 码：</label>
+                <div class="layui-input-block">
+                    <input type="password" id="password" placeholder="请输入密码" class="layui-input"/>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label "   >验证码：</label>
+                <div class="layui-input-block">
+                    <input type="password" id="validateCode" placeholder="请输入验证码" class="layui-input"/>
+                </div>
+                <a href="#" class="layui-form-item-code" title="看不清换一张"></a>
+            </div>
+
+            <form class="layui-form site-block" action="">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">openId：</label>
+                    <div class="layui-input-block">
+                        <input disabled type="text" value="o-JIdwePdsBGAzsJufyfZT_Ju3g4" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">会员id：</label>
+                    <div class="layui-input-block">
+                        <input disabled type="text" value="778171016223811948847" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">手机号：</label>
+                    <div class="layui-input-block">
+                        <input disabled type="text" value="15527323230" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">姓名：</label>
+                    <div class="layui-input-block">
+                        <input disabled type="text" value="徐俊伟" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">余额：</label>
+                    <div class="layui-input-block">
+                        <input disabled type="text" value="1012" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">积分：</label>
+                    <div class="layui-input-block">
+                        <input disabled type="text" value="0" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">性别：</label>
+                    <div class="layui-input-block">
+                        <input disabled type="text" value="男" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">状态：</label>
+                    <div class="layui-input-block">
+                        <input disabled type="text" value="被禁用" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">注册时间：</label>
+                    <div class="layui-input-block">
+                        <input disabled type="text" value="2017-10-16 22:38:13" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">更新时间：</label>
+                    <div class="layui-input-block">
+                        <input disabled type="text" value="2017-10-16 22:38:13" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </form>
+</body>  
+</html>
