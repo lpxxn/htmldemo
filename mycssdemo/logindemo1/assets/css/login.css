@@ -1,0 +1,36 @@
+.admin-login-block {
+    background: lightblue;
+    margin: 100px auto 0 auto;
+    max-width:600px;
+}
+
+.admin-log-text {
+    font-weight: 700;
+    font-size: 40px;
+    width: 100%;
+    text-align: center;
+}
+
+.admin-log-text span {
+    color: #1f25f5;
+}
+
+.admin-login-form {
+    margin: 0 auto;
+    width: 65%;
+}
+
+.admin-login-btn {
+    width: 100%;
+}
+
+
+.admin-login-copy {
+    text-align: center;
+}
+
+
+
+
+
+
