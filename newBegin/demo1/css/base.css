@@ -1,3 +1,38 @@
 span{
     color:red;
+    font-size: 20px;
 }
+
+/*
+.类选器名称{css样式代码;}
+*/
+.stress{
+    color:green;
+}
+
+/*
+#Id{css样式代码;}
+ */
+#atop1{
+    color: brown;
+}
+
+/*
+子选择器，即大于符号(>),用于选择指定标签元素的第一代子元素。
+ */
+.first>a{
+    border: 1px solid red;
+}
+
+/*
+包含(后代)选择器
+包含选择器，即加入空格,用于选择指定标签元素下的后辈元素
+ */
+.second span {
+    color: #ff959e;
+}
+
+/*
+通用选择器是功能最强大的选择器，它使用一个（*）号指定，它的作用是匹配html中所有标签元素
+* {color:red;}
+ */
